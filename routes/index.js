@@ -1,65 +1,91 @@
 const fs = require('fs')
 const faker = require('faker')
+const cnchar = require('cnchar')
 const moment = require('moment')
 const express = require('express')
 const router = express.Router()
 
-// faker.locale = "zh_CN"
+faker.locale = "zh_CN"
+moment.locale("zh-cn")
 
 const itemPerPage = 15
+const authorNum = 20
 let pageNum = 0
 
-const getImages = (page) => {
+let imagesData = []
+let fakersData = []
+let authorFakersData = []
+
+const getImages = async () => {
     const images = fs.readdirSync(`${__dirname}/../public/img`)
-    let array = []
-    let result = images.map((image, index) => {
-        array.push(`/img/${image}`)
-        if ((index + 1) % itemPerPage === 0 || index === images.length - 1) {
-            const temp = array
-            array = []
-            return temp
+    pageNum = images.length / itemPerPage + (images.length % itemPerPage ? 1 : 0)
+    for (let i = 0; i < pageNum; i++) {
+        let temp = []
+        for (let j = 0; j < itemPerPage; j++) {
+            temp.push(`/img/${images[i * itemPerPage + j]}`)
         }
-    }).filter(Boolean)
-    pageNum = result.length
-    if (page) {
-        return result[page - 1]
+        imagesData.push(temp)
     }
 }
 
-getImages()
+const getFakers = async () => {
+    for (let i = 0; i < pageNum; i++) {
+        let temp = []
+        for (let j = 0; j < itemPerPage; j++) {
+            const random = Math.round(Math.random() * 100) % (authorNum)
+            let fake = {
+                imageId: faker.random.uuid(),
+                imageName: faker.lorem.words(),
+                imageDescription: faker.lorem.sentence(),
+                imageDate: moment(faker.date.past()).format(),
+                imageDateFromNow: moment(faker.date.past()).fromNow(),
+                imageLikeCount: Math.round(Math.random() * 200),
+                imageDownloadCount: Math.round(Math.random() * 1000),
+                authorId: authorFakersData[random].id,
+                authorName: authorFakersData[random].name,
+                authorEmail: authorFakersData[random].email,
+                authorFollowerCount: authorFakersData[random].followerCount
+            }
+            temp.push(fake)
+        }
+        fakersData.push(temp)
+    }
+}
 
-const getFakers = () => {
-    let array = []
-    for (let i = 0; i < itemPerPage; i++) {
+const getAuthorFakers = async () => {
+    for (let i = 0; i < authorNum; i++) {
+        const name = faker.name.findName()
+            .replace(/[^\u4E00-\u9FFF]+/g, '')
         let fake = {
-            imageId: faker.random.uuid(),
-            imageName: faker.lorem.words(),
-            imageDescription: faker.lorem.lines(),
-            imageDate: faker.date.past(),
-            imageDateFromNow: moment(faker.date.past()).fromNow(),
-            imageLikeCount: Math.round(Math.random() * 200),
-            imageDownloadCount: Math.round(Math.random() * 1000),
-            authorId: faker.random.uuid(),
-            authorName: faker.name.findName(),
-            authorEmail: faker.internet.exampleEmail(),
-            authorFollowerCount: Math.round(Math.random() * 300)
+            id: faker.random.uuid(),
+            name: name,
+            email: `${name.spell('low')}@example.com`,
+            followerCount: Math.round(Math.random() * 300)
         }
-        array.push(fake)
+        authorFakersData.push(fake)
     }
-    return array
 }
+
+const init = async function () {
+    await getImages()
+    await getAuthorFakers()
+    await getFakers()
+}
+
+init().catch(error => {
+    console.log(error)
+})
 
 const handlePage = (req, res) => {
-    console.log(req.query.page)
     const page = Number(req.query.page ? req.query.page : 1)
-    const images = getImages(page)
+    const images = imagesData[page - 1]
     if (images) {
         res.render('index', {
             page: page,
             num: pageNum,
             item: itemPerPage,
             images: images,
-            fakers: getFakers()
+            fakers: fakersData[page - 1]
         })
     } else {
         res.render('index', {
@@ -67,7 +93,7 @@ const handlePage = (req, res) => {
             num: pageNum,
             item: itemPerPage,
             images: getImages(1),
-            fakers: getFakers()
+            fakers: fakersData[page - 1]
         })
     }
 }

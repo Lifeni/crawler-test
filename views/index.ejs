@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="用于 Python 爬虫的测试网页">
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
           rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
     <title>Faker Test #<%= page %></title>
     <style>
         body {
@@ -33,34 +35,40 @@
                                 <img class="card-img-top img-fluid" src="<%= images[i] %>" alt="<%= fakers[i].name %>"
                                      title="<%= fakers[i].imageName %>" data-id="<%= fakers[i].imageId %>">
                                 <div class="card-body">
-                                    <small class="like text-muted mr-1"
-                                           title="Like Count">
-                                        Like <%= fakers[i].imageLikeCount %>
-                                    </small>
-                                    <small class="download text-muted"
-                                           title="Download Count">
-                                        Download <%= fakers[i].imageDownloadCount %>
+                                    <small class="date text-muted"
+                                           data-date="<%= fakers[i].imageDate %>"
+                                           title="<%= fakers[i].imageDate %>">
+                                        <%= fakers[i].imageDateFromNow %>
                                     </small>
                                     <h5 class="card-title pt-1"><%= fakers[i].imageName %></h5>
                                     <p class="card-text"><%= fakers[i].imageDescription %></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="text-muted">
-                                            <small class="author text-muted"
+                                            <small class="author text-muted mr-2"
                                                    data-id="<%= fakers[i].authorId %>"
                                                    data-email="<%= fakers[i].authorEmail %>"
                                                    title="<%= fakers[i].authorEmail %>">
                                                 <%= fakers[i].authorName %>
                                             </small>
-                                            @
+                                             <i class="fas fa-user-plus fa-sm" style="color:#757575"></i>
                                             <small class="follower text-muted"
-                                                   title="Followers Count">
+                                                   title="粉丝数">
                                                 <%= fakers[i].authorFollowerCount %>
                                             </small>
                                         </span>
+                                        <span class="text-muted">
+                                            <i class="fas fa-heart fa-sm" style="color:#757575"></i>
+                                            <small class="like mr-2"
+                                                   title="点赞数">
+                                                <%= fakers[i].imageLikeCount %>
+                                            </small>
+                                            <i class="fas fa-download fa-sm" style="color:#757575"></i>
+                                            <small class="download"
+                                                   title="下载数">
+                                                <%= fakers[i].imageDownloadCount %>
+                                            </small>
+                                        </span>
 
-                                        <small class="date text-muted"
-                                               data-date="<%= fakers[i].imageDate %>"
-                                               title="<%= fakers[i].imageDate %>"><%= fakers[i].imageDateFromNow %></small>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +82,7 @@
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center pt-4">
         <li class="page-item <%= 1 === page ? 'disabled' : '' %>">
-            <a class="page-link" href="?page=<%= 1 === page ? 1 : page - 1 %>">Previous</a>
+            <a class="page-link" href="?page=<%= 1 === page ? 1 : page - 1 %>">上一页</a>
         </li>
         <% for(let i = 0; i < num; i++) { %>
             <li class="page-item <%= (i + 1) === page ? 'active' : '' %>">
@@ -82,7 +90,7 @@
             </li>
         <% } %>
         <li class="page-item <%= num === page ? 'disabled' : '' %>">
-            <a class="page-link" href="?page=<%= num === page ? num : page + 1 %>">Next</a>
+            <a class="page-link" href="?page=<%= num === page ? num : page + 1 %>">下一页</a>
         </li>
     </ul>
 </nav>
