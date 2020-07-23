@@ -40,8 +40,19 @@
                                            title="<%= fakers[i].imageDate %>">
                                         <%= fakers[i].imageDateFromNow %>
                                     </small>
-                                    <h5 class="card-title pt-1"><%= fakers[i].imageName %></h5>
-                                    <p class="card-text"><%= fakers[i].imageDescription %></p>
+                                    <h5 class="card-title pt-3 pb-1">
+                                        <%= fakers[i].poetryTitle %>
+                                        <small class="poetry-rhythmic text-muted font-weight-light ml-2"
+                                               title="词牌名">
+                                            <%= fakers[i].poetryRhythmic %>
+                                        </small>
+
+                                        <small class="poetry-author text-muted font-weight-light ml-2"
+                                               title="词作者">
+                                            <%= fakers[i].poetryAuthor %>
+                                        </small>
+                                    </h5>
+                                    <p class="card-text"><%= fakers[i].poetryContent %></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="text-muted">
                                             <small class="author text-muted mr-2"

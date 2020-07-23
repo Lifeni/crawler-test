@@ -8,6 +8,10 @@ const router = express.Router()
 faker.locale = "zh_CN"
 moment.locale("zh-cn")
 
+const poetry = require('../resource/花间集1-4.json')
+const poetrySet = new Set()
+// console.log(poetry.length) // 200
+
 const itemPerPage = 15
 const authorNum = 20
 let pageNum = 0
@@ -32,19 +36,28 @@ const getFakers = async () => {
     for (let i = 0; i < pageNum; i++) {
         let temp = []
         for (let j = 0; j < itemPerPage; j++) {
-            const random = Math.round(Math.random() * 100) % (authorNum)
+            let tempNum = Math.round(Math.random() * poetry.length)
+            while (poetrySet.has(tempNum)) {
+                tempNum = Math.round(Math.random() * poetry.length)
+            }
+            poetrySet.add(tempNum)
+            const randomPoetry = tempNum
+            const randomAuthor = Math.round(Math.random() * 100) % (authorNum)
             let fake = {
                 imageId: faker.random.uuid(),
                 imageName: faker.lorem.words(),
-                imageDescription: faker.lorem.sentence(),
                 imageDate: moment(faker.date.past()).format(),
                 imageDateFromNow: moment(faker.date.past()).fromNow(),
                 imageLikeCount: Math.round(Math.random() * 200),
                 imageDownloadCount: Math.round(Math.random() * 1000),
-                authorId: authorFakersData[random].id,
-                authorName: authorFakersData[random].name,
-                authorEmail: authorFakersData[random].email,
-                authorFollowerCount: authorFakersData[random].followerCount
+                authorId: authorFakersData[randomAuthor].id,
+                authorName: authorFakersData[randomAuthor].name,
+                authorEmail: authorFakersData[randomAuthor].email,
+                authorFollowerCount: authorFakersData[randomAuthor].followerCount,
+                poetryTitle: poetry[randomPoetry - 1].title,
+                poetryAuthor: poetry[randomPoetry - 1].author,
+                poetryRhythmic: poetry[randomPoetry - 1].rhythmic,
+                poetryContent: poetry[randomPoetry - 1].paragraphs.join(''),
             }
             temp.push(fake)
         }
@@ -59,7 +72,7 @@ const getAuthorFakers = async () => {
         let fake = {
             id: faker.random.uuid(),
             name: name,
-            email: `${name.spell('low')}@example.com`,
+            email: `${cnchar.spell(name, 'low')}@example.com`,
             followerCount: Math.round(Math.random() * 300)
         }
         authorFakersData.push(fake)
