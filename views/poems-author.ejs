@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="用于 Python 爬虫的测试网页">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
+    <title><%= author %></title>
+    <style>
+        body {
+            font-family: "思源宋体 CN", "Source Han Serif CN", Serif;
+        }
+
+        li a {
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 2.5rem;
+        }
+    </style>
+</head>
+<body class="container p-5 text-white bg-dark">
+<h1 class="mt-5 px-3 py-5 display-4 font-weight-bold">
+    <%= author %>
+</h1>
+<p class="px-3 py-5 m-0 <%= description === '--' ? 'd-none' : null %>"><%= description.replace(/--/, '') %></p>
+<p class="px-3 py-5 m-0 text-center">— <span class="px-2"><%= data.length %> 首词</span> —</p>
+<ul class="nav py-5 d-flex flex-wrap justify-content-center">
+    <% for(let i = 0; i < data.length; i++) { %>
+        <li class="nav-item">
+            <a class="nav-link px-3 py-2 text-white"
+               href="/poems/<%= author %>/<%= data[i].rhythmic %>@<%= data[i]['_id'].toString().slice(-4) %>">
+                《<%= data[i].rhythmic %>》
+                <small class="text-secondary"><%= data[i].paragraphs[0] %></small>
+            </a>
+        </li>
+    <% } %>
+</ul>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="用于 Python 爬虫的测试网页">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
+    <title>宋词</title>
+    <style>
+        body {
+            font-family: "思源宋体 CN", "Source Han Serif CN", Serif;
+        }
+
+        li a {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="container p-5 text-white bg-dark">
+<h1 class="mt-5 px-3 py-5 display-4 font-weight-bold">
+    作者 <%= data.length - 1 %> 人
+</h1>
+<ul class="nav py-5">
+    <% for(let i = 0; i < data.length; i++) { %>
+        <li class="nav-item">
+            <a class="nav-link px-3 py-2 text-white" href="/poems/<%= data[i]['_id'] %>">
+                <%= data[i]['_id'] %>
+                <span class="badge bg-secondary rounded-pill text-light ml-1"><%= data[i]['count'] %></span>
+            </a>
+        </li>
+    <% } %>
+</ul>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

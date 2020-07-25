@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="用于 Python 爬虫的测试网页">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
+    <title><%= data.rhythmic %> / <%= author %></title>
+    <style>
+        body {
+            font-family: "思源宋体 CN", "Source Han Serif CN", Serif;
+        }
+
+        li a {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="container p-5 text-white bg-dark d-flex">
+<header class="mt-5 pr-5 mr-5">
+    <h1 class="px-3 py-5 display-4 font-weight-bold">
+        <%= data.rhythmic %>
+    </h1>
+    <h2 class="px-3 pb-5 mb-5"><%= data.author %></h2>
+</header>
+<article class="py-5 mt-5">
+    <% for(let i = 0; i < data.paragraphs.length; i++) { %>
+        <p class="text-white px-3 display-6">
+            <%= data.paragraphs[i] %>
+        </p>
+    <% } %>
+</article>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

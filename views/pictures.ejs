@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="用于 Python 爬虫的测试网页">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
+    <title>必应壁纸 #<%= page %></title>
+    <style>
+        body {
+            font-family: "思源宋体 CN", "Source Han Serif CN", Serif;
+        }
+
+        i {
+            color: #eeeeee;
+        }
+
+        .page-link {
+            border: none;
+            color: #64B5F6;
+            background-color: #263238;
+            transition: all 0.2s;
+        }
+
+        .pagination-lg .page-link {
+            font-size: 1.75rem;
+        }
+
+        .page-link:hover {
+            color: #BBDEFB;
+            background-color: #37474F;
+        }
+
+        .page-item.disabled .page-link {
+            color: #757575;
+            background-color: #37474F;
+        }
+
+        .card-body {
+            left: 0;
+            bottom: -100%;
+            font-size: 1.5rem;
+            background-color: rgba(52, 58, 64, 0.8);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s;
+        }
+
+        .card:hover .card-body {
+            bottom: 0;
+        }
+    </style>
+</head>
+<body class="container-fluid p-0 bg-dark">
+<div class="row row-cols-1 row-cols-md-2 m-0">
+    <% for(let i = 0; i < item; i++) { %>
+        <% if (images[i]) { %>
+            <div class="col p-0">
+                <div class="card border-0 rounded-0 h-100 position-relative overflow-hidden">
+                    <img class="card-img-top img-fluid rounded-0" src="<%= images[i].url %>"
+                         alt="<%= images[i].text %>"
+                         title="<%= images[i].text %>">
+                    <div class="card-body p-5 position-absolute w-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <small class="date text-light"
+                                   title="<%= images[i].date %>">
+                                <%= images[i].date %>
+                            </small>
+                            <span class="text-light">
+                                <i class="fas fa-heart fa-sm"></i>
+                                <small class="like mr-2"
+                                       title="点赞数">
+                                    <%= images[i].like %>
+                                </small>
+                                <i class="fas fa-download fa-sm"></i>
+                                <small class="download"
+                                       title="下载数">
+                                    <%= images[i].download %>
+                                </small>
+                            </span>
+                        </div>
+                        <p class="card-text text-white"><%= images[i].text %></p>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+<nav aria-label="Page navigation" class="py-4">
+    <ul class="pagination pagination-lg justify-content-center pt-4 pb-2">
+        <li class="page-item <%= 1 === page ? 'disabled' : '' %>">
+            <a class="page-link px-4 py-3" href="?page=<%= 1 === page ? 1 : page - 1 %>">上一页</a>
+        </li>
+        <% for(let i = 0; i < num; i++) { %>
+            <li class="page-item <%= (i + 1) === page ? 'active' : '' %>">
+                <a class="page-link px-4 py-3" href="?page=<%= i + 1 %>"><%= i + 1 %></a>
+            </li>
+        <% } %>
+        <li class="page-item <%= num === page ? 'disabled' : '' %>">
+            <a class="page-link px-4 py-3" href="?page=<%= num === page ? num : page + 1 %>">下一页</a>
+        </li>
+    </ul>
+</nav>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

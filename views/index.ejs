@@ -8,103 +8,60 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
           rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
-    <title>Faker Test #<%= page %></title>
+    <title>Crawler Test</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: "思源宋体 CN", "Source Han Serif CN", Serif;
+        }
+
+        a {
+            background-image: radial-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.2) 166%);
+        }
+
+        .row div {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .pictures {
+            background-image: url("../home-bing.jpg");
+        }
+
+        .poems {
+            background-image: url("../home-songci.jpg");
+        }
+
+        .sentences {
+            background-image: url("../home-sentece.jpg");
         }
     </style>
 </head>
-<body class="py-5">
-<main>
-    <section class="py-5 text-center container">
-        <div class="row py-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="py-2">Faker Test #<%= page %></h1>
-                <p class="lead text-muted">用于 Python 爬虫的测试网页</p>
-            </div>
-        </div>
-    </section>
-    <div class="album py-5">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <% for(let i = 0; i < item; i++) { %>
-                    <% if (images[i]) { %>
-                        <div class="col">
-                            <div class="card">
-                                <img class="card-img-top img-fluid" src="<%= images[i] %>" alt="<%= fakers[i].name %>"
-                                     title="<%= fakers[i].imageName %>" data-id="<%= fakers[i].imageId %>">
-                                <div class="card-body">
-                                    <small class="date text-muted"
-                                           data-date="<%= fakers[i].imageDate %>"
-                                           title="<%= fakers[i].imageDate %>">
-                                        <%= fakers[i].imageDateFromNow %>
-                                    </small>
-                                    <h5 class="card-title pt-3 pb-1">
-                                        <%= fakers[i].poetryTitle %>
-                                        <small class="poetry-rhythmic text-muted font-weight-light ml-2"
-                                               title="词牌名">
-                                            <%= fakers[i].poetryRhythmic %>
-                                        </small>
-
-                                        <small class="poetry-author text-muted font-weight-light ml-2"
-                                               title="词作者">
-                                            <%= fakers[i].poetryAuthor %>
-                                        </small>
-                                    </h5>
-                                    <p class="card-text"><%= fakers[i].poetryContent %></p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="text-muted">
-                                            <small class="author text-muted mr-2"
-                                                   data-id="<%= fakers[i].authorId %>"
-                                                   data-email="<%= fakers[i].authorEmail %>"
-                                                   title="<%= fakers[i].authorEmail %>">
-                                                <%= fakers[i].authorName %>
-                                            </small>
-                                             <i class="fas fa-user-plus fa-sm" style="color:#757575"></i>
-                                            <small class="follower text-muted"
-                                                   title="粉丝数">
-                                                <%= fakers[i].authorFollowerCount %>
-                                            </small>
-                                        </span>
-                                        <span class="text-muted">
-                                            <i class="fas fa-heart fa-sm" style="color:#757575"></i>
-                                            <small class="like mr-2"
-                                                   title="点赞数">
-                                                <%= fakers[i].imageLikeCount %>
-                                            </small>
-                                            <i class="fas fa-download fa-sm" style="color:#757575"></i>
-                                            <small class="download"
-                                                   title="下载数">
-                                                <%= fakers[i].imageDownloadCount %>
-                                            </small>
-                                        </span>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <% } %>
-                <% } %>
-            </div>
-        </div>
+<body class="container-fluid p-0">
+<div class="row w-100 m-0">
+    <div class="col-12 col-md-4 p-0 min-vh-100 pictures">
+        <a href="/pictures"
+           class="h-100 d-flex justify-content-start align-items-end p-5 display-5 text-decoration-none text-light font-weight-bold">
+            <span class="p-0 p-lg-2 p-xl-4 text-nowrap overflow-hidden">必应壁纸</span>
+        </a>
     </div>
-</main>
-<nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center pt-4">
-        <li class="page-item <%= 1 === page ? 'disabled' : '' %>">
-            <a class="page-link" href="?page=<%= 1 === page ? 1 : page - 1 %>">上一页</a>
-        </li>
-        <% for(let i = 0; i < num; i++) { %>
-            <li class="page-item <%= (i + 1) === page ? 'active' : '' %>">
-                <a class="page-link" href="?page=<%= i + 1 %>"><%= i + 1 %></a>
-            </li>
-        <% } %>
-        <li class="page-item <%= num === page ? 'disabled' : '' %>">
-            <a class="page-link" href="?page=<%= num === page ? num : page + 1 %>">下一页</a>
-        </li>
-    </ul>
-</nav>
+    <div class="col-12 col-md-4 p-0 min-vh-100 poems">
+        <a href="/poems"
+           class="h-100 d-flex justify-content-start align-items-end p-5 display-5 text-decoration-none text-light font-weight-bold">
+            <span class="p-0 p-lg-2 p-xl-4 text-nowrap overflow-hidden">宋词</span>
+        </a>
+    </div>
+    <div class="col-12 col-md-4 p-0 min-vh-100 sentences">
+        <a href="/sentences"
+           class="h-100 d-flex justify-content-start align-items-end p-5 display-5 text-decoration-none text-light font-weight-bold">
+            <span class="p-0 p-lg-2 p-xl-4 text-nowrap overflow-hidden">一言</span>
+        </a>
+    </div>
+</div>
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="用于 Python 爬虫的测试网页">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
+    <title>一言 #<%= id %></title>
+    <style>
+        body {
+            font-family: "思源宋体 CN", "Source Han Serif CN", Serif;
+        }
+
+        h1 {
+            line-height: 6rem;
+        }
+    </style>
+</head>
+<body class="container p-5 d-flex justify-content-between align-items-start flex-column min-vh-100 bg-dark text-white">
+<h3 class="text-light py-5">
+    #<span class="id mr-2"><%= id %></span>
+    <span class="type" title="<%= typeDesc %>" data-desc="<%= typeDesc %>"><%= typeName %></span>
+</h3>
+<div class="py-5">
+    <h1 class="fa-4x"><%= text %></h1>
+    <p class="py-3 fa-3x">
+        —— <span class="from mr-2"><%= from %></span>
+        <%= fromWho && fromWho !== 'null' ? '/' : null %>
+        <span class="from-who ml-2"><%= fromWho !== 'null' ? fromWho : null %></span>
+    </p>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
