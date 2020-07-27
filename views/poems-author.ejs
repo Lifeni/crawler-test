@@ -28,7 +28,8 @@
 <h1 class="mt-5 px-3 py-5 display-4 font-weight-bold">
     <%= author %>
 </h1>
-<p class="px-3 py-5 m-0 <%= description === '--' ? 'd-none' : null %>"><%= description.replace(/--/, '') %></p>
+<p class="px-3 py-5 m-0 <%= description === '--' ? 'd-none' : null %>"
+   id="description"><%= description.replace(/--/, '') %></p>
 <p class="px-3 py-5 m-0 text-center">— <span class="px-2"><%= data.length %> 首词</span> —</p>
 <ul class="nav py-5 d-flex flex-wrap justify-content-center">
     <% for(let i = 0; i < data.length; i++) { %>

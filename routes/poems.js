@@ -35,6 +35,7 @@ const handleIndexPage = async (req, res) => {
 
 const handleAuthorPage = async (req, res, name) => {
     Poems.find({ author: decodeURI(name) }).then(async (data) => {
+        // console.log(data)
         if (!data[0]) {
             await res.status(404)
             await res.send('Not Found')
@@ -42,7 +43,7 @@ const handleAuthorPage = async (req, res, name) => {
             // console.log(data)
             await res.render('poems-author', {
                 author: decodeURI(name),
-                description: data[0].author_desc,
+                description: data[0].author_desc ? data[0].author_desc : '--',
                 data: data,
             })
         }

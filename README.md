@@ -94,4 +94,4 @@ docker run -itd --name crawler-mongo -p 27017:27017 mongo
    # node ./bin/www
    ```
 
-5. 访问打开 http://localhost:3000，或者使用服务器反向代理 3000 端口即可。
+5. 访问打开 http://localhost:3000 ，或者使用服务器反向代理 3000 端口即可。
