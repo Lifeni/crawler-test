@@ -23,10 +23,10 @@ const getImages = async () => {
             const info = JSON.parse(fs.readFileSync(dir).toString())
             temp.push({
                 url: `/image/${images[i * itemPerPage + j]}`,
-                date: moment(name).format('YYYY 年 M 月 D 日'),
+                date: moment(name).format('M 月 D 日'),
                 text: info['zh-CN']['images'][0]['copyright'],
-                like: Math.round(Math.random() * 200),
-                download: Math.round(Math.random() * 1000),
+                like: Math.floor(Math.random() * (2000 - 1500 + 1) + 1500),
+                download: Math.floor(Math.random() * (8000 - 5000 + 1) + 5000),
             })
         }
         imagesData.push(temp)
