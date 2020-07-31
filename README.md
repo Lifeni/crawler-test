@@ -2,6 +2,8 @@
 
 用于 Python 爬虫的测试网站，需要 Node 环境和 MongoDB。
 
+展示网站的仓库：[Lifeni/crawler-dashboard: Python 爬虫与数据展示](https://github.com/Lifeni/crawler-dashboard) 。
+
 ## 内容
 
 测试网站分为三个部分，包含了不同的网站结构，方便进行爬虫测试。
